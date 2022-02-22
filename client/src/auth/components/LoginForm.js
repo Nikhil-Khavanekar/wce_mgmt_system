@@ -120,9 +120,9 @@ export default function LoginForm({ isLoggedIn, setIsLoggedIn }) {
           setIsLoggedIn(!isLoggedIn);
           console.log(type);
           if (type === 'store') {
-            history.push(`/ui/store`);
+            history.push(`/store`);
           } else {
-            history.push(`/ui/dashboard/${type}`);
+            history.push(`/dashboard/${type}`);
           }
         } catch (error) {
           setLoading(false);

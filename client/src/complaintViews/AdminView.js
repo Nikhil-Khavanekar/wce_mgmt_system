@@ -59,7 +59,7 @@ export default function AdminView(props) {
       console.log(complaintId);
       try {
         if (!complaintId) {
-          history.push('/ui/dashboard/admin');
+          history.push('/dashboard/admin');
           return;
         }
         const result = await axiosInstance.get(
@@ -84,12 +84,12 @@ export default function AdminView(props) {
          }
       } catch (error) {
         try {
-          if (error.response.status === 403) history.push('/ui/login');
+          if (error.response.status === 403) history.push('/login');
           setMessage(error.response.data.error);
           setMessageType('error');
           setOpen(true);
         } catch (error) {
-          history.push('/ui/dashboard/admin');
+          history.push('/dashboard/admin');
           setMessageType('error');
           setOpen(true);
         }
@@ -150,7 +150,7 @@ export default function AdminView(props) {
     try {
       console.log(data);
       await axiosInstance.post(`/api/complaint/accept/${complaintId}`, data);
-      history.push('/ui/dashboard/admin');
+      history.push('/dashboard/admin');
     } catch (error) {
       try {
         setMessage(error.response.data.error);
@@ -187,10 +187,10 @@ export default function AdminView(props) {
     setButtonVisibility(false);
     try {
       await axiosInstance.post(`/api/complaint/accept/${complaintId}`);
-      history.push("/ui/dashboard/admin");
+      history.push("/dashboard/admin");
     } catch (error) {
       try {
-        if (error.response.status === 403) history.push("/ui/login");
+        if (error.response.status === 403) history.push("/login");
         setMessage(error.response.data.error);
         setMessageType("error");
         setOpen(true);
@@ -198,7 +198,7 @@ export default function AdminView(props) {
         setMessage("Database Error");
         setMessageType("error");
         setOpen(true);
-        history.push("/ui/dashboard/admin");
+        history.push("/dashboard/admin");
       }
     }
   }
@@ -218,7 +218,7 @@ export default function AdminView(props) {
           align={width > 960 ? 'right' : 'left'}
           className={classes.backButton}
         >
-          <Link to="/ui/dashboard/admin">
+          <Link to="/dashboard/admin">
             <Button
               size="large"
               fullWidth

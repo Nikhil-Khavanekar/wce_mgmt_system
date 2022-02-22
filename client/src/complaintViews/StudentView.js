@@ -50,7 +50,7 @@ const StudentView = () => {
     (async () => {
       try {
         if (!complaintId) {
-          history.push('/ui/dashboard/student');
+          history.push('/dashboard/student');
           return;
         }
         const result = await axiosInstance.get(
@@ -64,12 +64,12 @@ const StudentView = () => {
        }
       } catch (error) {
         try {
-          if (error.response.status === 403) history.push('/ui/login');
+          if (error.response.status === 403) history.push('/login');
           setMessage(error.response.data.error);
           setMessageType('error');
           setOpen(true);
         } catch (error) {
-          history.push('/ui/dashboard/student');
+          history.push('/dashboard/student');
         }
       }
     })();
@@ -78,10 +78,10 @@ const StudentView = () => {
     // setButtonVisibility(false);
     try {
       await axiosInstance.post(`/api/complaint/accept/${complaintId}`);
-      history.push("/ui/dashboard/student");
+      history.push("/dashboard/student");
     } catch (error) {
       try {
-        if (error.response.status === 403) history.push("/ui/login");
+        if (error.response.status === 403) history.push("/login");
         setMessage(error.response.data.error);
         setMessageType("error");
         setOpen(true);
@@ -89,7 +89,7 @@ const StudentView = () => {
         setMessage("Database Error");
         setMessageType("error");
         setOpen(true);
-        history.push("/ui/dashboard/student");
+        history.push("/dashboard/student");
       }
     }
   }
@@ -115,7 +115,7 @@ const StudentView = () => {
           align={width > 960 ? 'right' : 'left'}
           className={classes.backButton}
         >
-          <Link to="/ui/dashboard/student">
+          <Link to="/dashboard/student">
             <Button
               size="large"
               fullWidth

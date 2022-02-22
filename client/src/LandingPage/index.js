@@ -57,7 +57,7 @@ export default function ButtonAppBar() {
           <Typography variant="h3" className={classes.title}>
             WCE Maintenance Management System
           </Typography>
-          <Link to="/ui/login">
+          <Link to="/login">
             <Button
               variant="contained"
               color="secondary"
@@ -68,7 +68,7 @@ export default function ButtonAppBar() {
             </Button>
           </Link>
           {/* This Button uses a Font Icon, see the installation instructions in the Icon component docs. */}
-          <Link to="/ui/help">
+          <Link to="/help">
             <Button
               variant="contained"
               color="primary"
@@ -86,7 +86,7 @@ export default function ButtonAppBar() {
           >
             About Us
           </Button>
-          <Link to="/ui/contactPage">
+          <Link to="/contactPage">
             <Button
               variant="contained"
               color="default"

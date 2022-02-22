@@ -90,7 +90,7 @@ export default function DashboardHeader({
           <Grid item md={3} xs={6}>
             {match.url.substring(match.url.lastIndexOf('/') + 1) ===
               'student' && (
-              <Link to="/ui/forms/complaint">
+              <Link to="/forms/complaint">
                 <Button
                   fullWidth
                   variant="contained"
@@ -104,7 +104,7 @@ export default function DashboardHeader({
             )}
             {match.url.substring(match.url.lastIndexOf('/') + 1) ===
               'admin' && (
-              <Link to="/ui/forms/Report">
+              <Link to="/forms/Report">
                 <Button
                   fullWidth
                   variant="contained"
@@ -118,7 +118,7 @@ export default function DashboardHeader({
             )}
              {match.url.substring(match.url.lastIndexOf('/') + 1) ===
               'store' && (
-              <Link to="/ui/store/Store">
+              <Link to="/store/Store">
                 <Button
                   fullWidth
                   variant="contained"

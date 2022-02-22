@@ -15,9 +15,9 @@ const Dashboards = ({ match }) => {
     const isAuthenticated = async () => {
       try {
         const result = await axiosInstance.get('/api/isAuthenticated');
-        if (!result.data.success) history.push('/ui');
+        if (!result.data.success) history.push('/');
       } catch (error) {
-        history.push('/ui');
+        history.push('/');
       }
     };
     isAuthenticated();
@@ -55,7 +55,7 @@ const Dashboards = ({ match }) => {
       />
       
 
-      <Redirect to="/ui/error" />
+      <Redirect to="/error" />
     </Switch>
   );
 };

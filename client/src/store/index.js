@@ -9,7 +9,7 @@ const Dashboards = ({ match }) => {
   return (
     <Switch>
       <Route path={`${match.url}/`} render={(props) => <StoreDashboard {...props} />} />
-      <Redirect to="/ui/error" />
+      <Redirect to="/error" />
     </Switch>
   );
 };

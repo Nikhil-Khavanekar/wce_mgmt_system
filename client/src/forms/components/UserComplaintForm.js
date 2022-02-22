@@ -162,7 +162,7 @@ export default function UserComplaintForm() {
               setMessageType('success');
               setOpen(true);
 
-              history.push('/ui/dashboard/student');
+              history.push('/dashboard/student');
 
               resetForm();
             } catch (error) {

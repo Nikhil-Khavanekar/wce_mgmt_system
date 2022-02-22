@@ -164,7 +164,7 @@ export default function TableD({
                 <StyledTableCell align="center">
                   <Link
                     to={{
-                      pathname: `/ui/view/${type}/${row.compId}`,
+                      pathname: `/view/${type}/${row.compId}`,
                     }}
                   >
                     <Button>View</Button>

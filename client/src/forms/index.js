@@ -13,9 +13,9 @@ const Forms = ({ match }) => {
     const isAuthenticated = async () => {
       try {
         const result = await axiosInstance.get('/api/isAuthenticated');
-        if (!result.data.success) history.push('/ui/login');
+        if (!result.data.success) history.push('/login');
       } catch (error) {
-        history.push('/ui/login');
+        history.push('/login');
       }
     };
     isAuthenticated();
@@ -38,7 +38,7 @@ const Forms = ({ match }) => {
         render={(props) => <FormB {...props} />}
       />
 
-      <Redirect to="/ui/error" />
+      <Redirect to="/error" />
     </Switch>
   );
 };

@@ -54,7 +54,7 @@ export default function RejectReasonForm({ type, complaintId, acceptHandler }) {
         queryData
       );
       if (!result.data.success) throw new Error();
-      history.push(`/ui/dashboard/${type}/`);
+      history.push(`/dashboard/${type}/`);
       setMessage('Sent rejection status');
       setMessageType('error');
       setOpen(true);

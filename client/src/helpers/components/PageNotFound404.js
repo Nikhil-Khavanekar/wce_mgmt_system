@@ -26,7 +26,7 @@ export default function PageNotFound404() {
               </Typography>
             </Grid>
             <Grid xs={12} align="center">
-              <Link to="/ui" style={{ textDecoration: 'none' }}>
+              <Link to="/" style={{ textDecoration: 'none' }}>
                 <Button variant="contained" size="large" color="secondary">
                   <HomeRoundedIcon />
                   &nbsp;

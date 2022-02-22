@@ -38,7 +38,7 @@ const Dashboards = ({ match }) => {
         render={(props) => <StoreView {...props} />}
       />
 
-      <Redirect to="/ui/error" />
+      <Redirect to="/error" />
     </Switch>
   );
 };

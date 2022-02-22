@@ -94,7 +94,7 @@ const UserInfoAndMenu = ({
     } finally {
       window.localStorage.removeItem('WCEMaintananceManagementSystemUser');
       setIsLoggedIn(!isLoggedIn);
-      history.push('/ui/login');
+      history.push('/login');
       handleClose();
     }
   };
