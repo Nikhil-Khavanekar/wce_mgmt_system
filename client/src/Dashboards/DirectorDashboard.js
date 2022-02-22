@@ -76,7 +76,7 @@ setData(tmpData);
         setTableData(tmpData);
       } catch (error) {
         try {
-           if (error.response.status === 403) history.push('/login');
+           if (error.response.status === 403) history.push('/ui/login');
           setLoading(false);
           setMessage(error.response.data.error);
           setMessageType('error');

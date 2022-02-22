@@ -58,7 +58,7 @@ const CommiteeView = (props) => {
     (async () => {
       try {
         if (!complaintId) {
-          history.push('/dashboard/commitee');
+          history.push('/ui/dashboard/commitee');
           return;
         }
         const result = await axiosInstance.get(
@@ -87,7 +87,7 @@ const CommiteeView = (props) => {
         }
       } catch (error) {
         try {
-          if (error.response.status === 403) history.push('/login');
+          if (error.response.status === 403) history.push('/ui/login');
           setMessage(error.response.data.error);
           setMessageType('error');
           setOpen(true);
@@ -95,7 +95,7 @@ const CommiteeView = (props) => {
           setMessage('Unable to fetch data');
           setMessageType('error');
           setOpen(true);
-          history.push('/dashboard/committee');
+          history.push('/ui/dashboard/committee');
         }
       }
     })();
@@ -105,10 +105,10 @@ const CommiteeView = (props) => {
     try {
       await axiosInstance.post(`/api/complaint/accept/${complaintId}`);
 
-      history.push('/dashboard/committee');
+      history.push('/ui/dashboard/committee');
     } catch (error) {
       try {
-        if (error.response.status === 403) history.push('/login');
+        if (error.response.status === 403) history.push('/ui/login');
         setMessage(error.response.data.error);
         setMessageType('error');
         setOpen(true);
@@ -116,7 +116,7 @@ const CommiteeView = (props) => {
         setMessage('Database Error');
         setMessageType('error');
         setOpen(true);
-        history.push('/dashboard/committee');
+        history.push('/ui/dashboard/committee');
       }
     }
   };
@@ -128,10 +128,10 @@ const CommiteeView = (props) => {
       );
 console.log(result.data.complaint);
       await axiosInstance.post(`/api/complaint/accept/${complaintId}`);
-      history.push("/dashboard/committee");
+      history.push("/ui/dashboard/committee");
     } catch (error) {
       try {
-        if (error.response.status === 403) history.push("/login");
+        if (error.response.status === 403) history.push("/ui/login");
         setMessage(error.response.data.error);
         setMessageType("error");
         setOpen(true);
@@ -139,7 +139,7 @@ console.log(result.data.complaint);
         setMessage("Database Error");
         setMessageType("error");
         setOpen(true);
-        history.push("/dashboard/committee");
+        history.push("/ui/dashboard/committee");
       }
     }
   }
@@ -165,7 +165,7 @@ console.log(result.data.complaint);
           align={width > 960 ? 'right' : 'left'}
           className={classes.backButton}
         >
-          <Link to="/dashboard/committee">
+          <Link to="/ui/dashboard/committee">
             <Button
               size="large"
               fullWidth

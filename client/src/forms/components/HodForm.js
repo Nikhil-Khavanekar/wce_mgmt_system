@@ -96,7 +96,7 @@ export default function HodForm({ complaintId, rejectHandler }) {
       setMessage('Request forwarded to Administrative Officer');
       setMessageType('success');
       setOpen(true);
-      history.push('/dashboard/hod');
+      history.push('/ui/dashboard/hod');
     } catch (error) {
       setLoading(false);
       try {

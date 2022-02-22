@@ -58,7 +58,7 @@ const HodView = (props) => {
     (async () => {
       try {
         if (!complaintId) {
-          history.push('/dashboard/hod');
+          history.push('/ui/dashboard/hod');
           return;
         }
         const result = await axiosInstance.get(
@@ -69,7 +69,7 @@ const HodView = (props) => {
         setComplaint(result.data.complaint);
       } catch (error) {
         try {
-          if (error.response.status === 403) history.push('/login');
+          if (error.response.status === 403) history.push('/ui/login');
           setMessage(error.response.data.error);
           setMessageType('error');
           setOpen(true);
@@ -77,7 +77,7 @@ const HodView = (props) => {
           setMessage('Unable to fetch data');
           setMessageType('error');
           setOpen(true);
-          history.push('/dashboard/hod');
+          history.push('/ui/dashboard/hod');
         }
       }
     })();
@@ -162,7 +162,7 @@ const HodView = (props) => {
           align={width > 960 ? 'right' : 'left'}
           className={classes.backButton}
         >
-          <Link to="/dashboard/hod">
+          <Link to="/ui/dashboard/hod">
             <Button
               size="large"
               fullWidth

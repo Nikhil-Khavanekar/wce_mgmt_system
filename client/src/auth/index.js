@@ -13,7 +13,7 @@ const LoginIndex = ({ match, setIsLoggedIn, isLoggedIn }) => {
           <Login {...{ setIsLoggedIn, isLoggedIn, ...routeProps }} />
         )}
       />
-      <Redirect to="/error" />
+      <Redirect to="/ui/error" />
     </Switch>
   );
 };

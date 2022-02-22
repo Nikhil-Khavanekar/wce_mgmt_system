@@ -35,27 +35,27 @@ const App = () => {
           <Container>
             <Header setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
             <Switch>
-              {/* <Redirect exact from="/" to={'/'} /> */}
-              <Route exact path="/landing" component={landing} />
-              <Route exact path="/help" component={Help} />
-              <Route exact path="/contactPage" component={Contact} />
-              <Route exact path="/" component={landing} />
-              <Route path="/forms/Report" component={Report} />
+              <Redirect exact from="/" to={'/ui'} />
+              <Route exact path="/ui/landing" component={landing} />
+              <Route exact path="/ui/help" component={Help} />
+              <Route exact path="/ui/contactPage" component={Contact} />
+              <Route exact path="/ui" component={landing} />
+              <Route path="/ui/forms/Report" component={Report} />
               <Route
-                path="/login"
+                path="/ui/login"
                 render={(props) => (
                   <Login {...{ setIsLoggedIn, isLoggedIn, ...props }} />
                 )}
               />
 
-              <Route path="/dashboard" component={Dashboards} />
-              <Route path="/forms/" component={Forms} />
-              <Route exact path="/store" component={StoreDashboard} />
-              <Route path="/view" component={ComplaintViews} />
-              <Route path="/error" component={PageNotFound404} />
-              <Route path="/table" component={Table}/>
-              <Route exact path="/store/Store" component={Store} />
-              <Redirect to="/error" />
+              <Route path="/ui/dashboard" component={Dashboards} />
+              <Route path="/ui/forms/" component={Forms} />
+              <Route exact path="/ui/store" component={StoreDashboard} />
+              <Route path="/ui/view" component={ComplaintViews} />
+              <Route path="/ui/error" component={PageNotFound404} />
+              <Route path="/ui/table" component={Table}/>
+              <Route exact path="/ui/store/Store" component={Store} />
+              <Redirect to="/ui/error" />
             </Switch>
           </Container>
         </Paper>

@@ -78,7 +78,7 @@ export default function DirectorView(props) {
       console.log(complaintId);
       try {
         if (!complaintId) {
-          history.push("/dashboard/director");
+          history.push("/ui/dashboard/director");
           return;
         }
         const result = await axiosInstance.get(
@@ -129,12 +129,12 @@ export default function DirectorView(props) {
         setComplaint(result.data.complaint);
       } catch (error) {
         try {
-          if (error.response.status === 403) history.push("/login");
+          if (error.response.status === 403) history.push("/ui/login");
           setMessage(error.response.data.error);
           setMessageType("error");
           setOpen(true);
         } catch (error) {
-          history.push("/dashboard/director");
+          history.push("/ui/dashboard/director");
           setMessageType("error");
           setOpen(true);
         }
@@ -153,10 +153,10 @@ export default function DirectorView(props) {
       console.log(queryData);
       try{
       await axiosInstance.post(`/api/complaint/accept/${complaintId}/`,queryData);
-      history.push("/store");
+      history.push("/ui/store");
     } catch (error) {
       try {
-        if (error.response.status === 403) history.push("/login");
+        if (error.response.status === 403) history.push("/ui/login");
         setMessage(error.response.data.error);
         setMessageType("error");
         setOpen(true);
@@ -164,7 +164,7 @@ export default function DirectorView(props) {
         setMessage("Database Error");
         setMessageType("error");
         setOpen(true);
-        history.push("/store");
+        history.push("/ui/store");
       }
     }
   }
@@ -369,7 +369,7 @@ export default function DirectorView(props) {
           align={width > 960 ? "right" : "left"}
           className={classes.backButton}
         >
-          <Link to="/store">
+          <Link to="/ui/store">
             <Button
               size="large"
               fullWidth

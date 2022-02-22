@@ -273,7 +273,7 @@ const Report = () => {
         //countRecords();
       } catch (error) {
         try {
-          if (error.response.status === 403) history.push('/login');
+          if (error.response.status === 403) history.push('/ui/login');
 
           setMessage(error.response.data.error);
           setMessageType('error');
@@ -409,7 +409,7 @@ const Report = () => {
               </Button>
             </Grid>
             <Grid item md={3} xs={6}>
-              <Link to="/forms/Report">
+              <Link to="/ui/forms/Report">
                 <Button
                   fullWidth
                   variant="contained"

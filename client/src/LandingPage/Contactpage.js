@@ -9,10 +9,10 @@ export default function PageNotFound404() {
   return (
     <>
       <Breadcrumbs aria-label="breadcrumb">
-        <Link color="inherit" to="/">
+        <Link color="inherit" to="/ui">
           Home
         </Link>
-        <Link color="inherit" to="/login">
+        <Link color="inherit" to="/ui/login">
           Login
         </Link>
       </Breadcrumbs>
@@ -24,7 +24,7 @@ export default function PageNotFound404() {
             <Typography variant="h6">LinkedIn:</Typography>
             <Typography variant="h6">Phone No:</Typography>
             <Typography variant="h6">Developers:</Typography>
-            <Link to="/">
+            <Link to="/ui">
               <Button variant="success" size="lg">
                 <HomeRoundedIcon />
                 &nbsp;

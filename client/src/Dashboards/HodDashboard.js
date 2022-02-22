@@ -54,7 +54,7 @@ const HodDashboard = ({ match }) => {
         setTableData(tmpData);
       } catch (error) {
         try {
-          if (error.response.status === 403) history.push('/login');
+          if (error.response.status === 403) history.push('/ui/login');
           setMessage(error.response.data.error);
           setMessageType('error');
           setOpen(true);
