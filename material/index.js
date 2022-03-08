@@ -1,14 +1,14 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const { validatePost, validateUpdate, validateDelete } = require('./validate');
-const { verifyAdmin } = require('../verifyAuthToken');
-const Material = require('./model');
-const Store = require('../store/model');
-var ObjectId = require('mongoose').Types.ObjectId;
+const { validatePost, validateUpdate, validateDelete } = require("./validate");
+const { verifyAdmin } = require("../verifyAuthToken");
+const Material = require("./model");
+const Store = require("../store/model");
+var ObjectId = require("mongoose").Types.ObjectId;
 
-router.all('*', verifyAdmin, (req, res, next) => next());
+router.all("*", verifyAdmin, (req, res, next) => next());
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const data = await Material.find();
     return res.status(200).json({
@@ -18,19 +18,19 @@ router.get('/', async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       success: 0,
-      error: 'Unable to find data',
+      error: "Unable to find data",
     });
   }
 });
 
-router.post('/', validatePost, async (req, res) => {
+router.post("/", validatePost, async (req, res) => {
   try {
     const complaintId = ObjectId(req.body.complaintId);
     const existingMaterial = await Material.findOne({
       complaintId,
     });
 
-    if (req.body.type === 'available') {
+    if (req.body.type === "available") {
       let data;
       if (!existingMaterial) {
         const newMaterial = new Material({
@@ -104,20 +104,20 @@ router.post('/', validatePost, async (req, res) => {
     console.log(error);
     return res.status(400).json({
       success: 0,
-      error: 'Could not add material',
+      error: "Could not add material",
     });
   }
 });
 
-router.put('/:id', validateUpdate, async (req, res) => {
+router.put("/:id", validateUpdate, async (req, res) => {
   try {
     if (!req.params.id)
       return res.status(400).json({
         success: 0,
-        error: 'Id not provided',
+        error: "Id not provided",
       });
 
-    if (req.body.type === 'available') {
+    if (req.body.type === "available") {
       const material = await Store.findOne(
         { _id: req.params.id },
         { quantity: 1 }
@@ -131,15 +131,15 @@ router.put('/:id', validateUpdate, async (req, res) => {
         return res.status(400).json({
           success: 0,
           error:
-            'Requested No Of Units Does not Exist In Store...Please Contact Store',
+            "Requested No Of Units Does not Exist In Store...Please Contact Store",
         });
 
       const response = await Material.updateOne(
         {
           complaintId: ObjectId(req.body.complaintId),
-          'availableInStore.materialId': ObjectId(req.params.id),
+          "availableInStore.materialId": ObjectId(req.params.id),
         },
-        { $set: { 'availableInStore.$.quantity': req.body.quantity } },
+        { $set: { "availableInStore.$.quantity": req.body.quantity } },
         { new: true }
       );
 
@@ -160,13 +160,13 @@ router.put('/:id', validateUpdate, async (req, res) => {
       const response = await Material.updateOne(
         {
           complaintId: ObjectId(req.body.complaintId),
-          'orderedMaterial._id': ObjectId(req.params.id),
+          "orderedMaterial._id": ObjectId(req.params.id),
         },
         {
           $set: {
-            'orderedMaterial.$.material': req.body.material,
-            'orderedMaterial.$.quantity': req.body.quantity,
-            'orderedMaterial.$.approxCost': req.body.approxCost,
+            "orderedMaterial.$.material": req.body.material,
+            "orderedMaterial.$.quantity": req.body.quantity,
+            "orderedMaterial.$.approxCost": req.body.approxCost,
           },
         },
         { new: true }
@@ -180,21 +180,21 @@ router.put('/:id', validateUpdate, async (req, res) => {
     console.log(error);
     return res.status(400).json({
       success: 0,
-      error: 'Unable to update data',
+      error: "Unable to update data",
     });
   }
 });
 
 //New
-router.put('/labour/:id', validateUpdate, async (req, res) => {
+router.put("/labour/:id", validateUpdate, async (req, res) => {
   try {
     if (!req.params.id)
       return res.status(400).json({
         success: 0,
-        error: 'Id not provided',
+        error: "Id not provided",
       });
 
-    if (req.body.type === 'available') {
+    if (req.body.type === "available") {
       const lType = await Store.findOne(
         { _id: req.params.id },
         { quantity: 1 }
@@ -208,19 +208,18 @@ router.put('/labour/:id', validateUpdate, async (req, res) => {
         return res.status(400).json({
           success: 0,
           error:
-            'Requested No Of Units Does not Exist In Store...Please Contact Store',
+            "Requested No Of Units Does not Exist In Store...Please Contact Store",
         });
 
       const response = await Material.updateOne(
         {
           complaintId: ObjectId(req.body.complaintId),
-          'availableInStore.materialId': ObjectId(req.params.id),
+          "availableInStore.materialId": ObjectId(req.params.id),
         },
-        { $set: { 'availableInStore.$.quantity': req.body.quantity } },
+        { $set: { "availableInStore.$.quantity": req.body.quantity } },
         { new: true }
       );
 
-      
       return res.status(200).json({
         success: 1,
         data: response,
@@ -229,13 +228,13 @@ router.put('/labour/:id', validateUpdate, async (req, res) => {
       const response = await Material.updateOne(
         {
           complaintId: ObjectId(req.body.complaintId),
-          'orderedMaterial._id': ObjectId(req.params.id),
+          "orderedMaterial._id": ObjectId(req.params.id),
         },
         {
           $set: {
-            'orderedMaterial.$.material': req.body.material,
-            'orderedMaterial.$.quantity': req.body.quantity,
-            'orderedMaterial.$.approxCost': req.body.approxCost,
+            "orderedMaterial.$.material": req.body.material,
+            "orderedMaterial.$.quantity": req.body.quantity,
+            "orderedMaterial.$.approxCost": req.body.approxCost,
           },
         },
         { new: true }
@@ -249,19 +248,19 @@ router.put('/labour/:id', validateUpdate, async (req, res) => {
     console.log(error);
     return res.status(400).json({
       success: 0,
-      error: 'Unable to update data',
+      error: "Unable to update data",
     });
   }
 });
 
-router.delete('/:id', validateDelete, async (req, res) => {
+router.delete("/:id", validateDelete, async (req, res) => {
   try {
     if (!req.params.id)
       return res.status(400).json({
         success: 0,
-        error: 'Id not provided',
+        error: "Id not provided",
       });
-    if (req.body.type === 'available') {
+    if (req.body.type === "available") {
       await Material.updateOne(
         { complaintId: req.body.complaintId },
         { $pull: { availableInStore: { materialId: req.params.id } } }
@@ -283,7 +282,55 @@ router.delete('/:id', validateDelete, async (req, res) => {
     console.log(error);
     return res.status(400).json({
       success: 0,
-      error: 'Unable to delete record',
+      error: "Unable to delete record",
+    });
+  }
+});
+
+router.put("/actualcost/:id", async (req, res) => {
+  try {
+    if (!req.params.id)
+      return res.status(400).json({
+        success: 0,
+        error: "Id not provided",
+      });
+    console.log(req.body.actualCostArrayObj[0].actual);
+    const response = await Material.updateOne(
+      {
+        complaintId: ObjectId(req.body.complaintId),
+      },
+      [
+        {
+          $set: {
+            orderedMaterial: {
+              $map: {
+                input: { $range: [0, { $size: "$orderedMaterial" }] },
+                in: {
+                  $mergeObjects: [
+                    { $arrayElemAt: ["$orderedMaterial", "$$this"] },
+                    {
+                      actualCost: {
+                        $arrayElemAt: [req.body.actualCostArrayObj, "$$this"],
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        },
+      ],
+      { new: true }
+    );
+    return res.status(200).json({
+      success: 1,
+      data: response,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      success: 0,
+      error: "Unable to update data",
     });
   }
 });

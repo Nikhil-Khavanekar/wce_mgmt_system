@@ -80,13 +80,13 @@ router.get("/:id", verify, async (req, res) => {
           [`grantAccessTo.${department}.isGranted`]: true,
         };
         break;
-      case 'director':
+      case "director":
         query = { stage: { $gte: 4 } };
         break;
-        case 'store':
-          query = {stage :{$gte:5},
-          status :['Forwarded to store','Material allocated'],
-         
+      case "store":
+        query = {
+          stage: { $gte: 5 },
+          status: ["Forwarded to store", "Material allocated"],
         };
     }
 
@@ -285,16 +285,14 @@ router.post("/accept/:id", verify, validateAcceptSchema, async (req, res) => {
 
     const {
       userId: { email },
-      grantAccessTo
-    } = await Complaint.findOne({ compId: req.params.id }, { grantAccessTo: 1})
+      grantAccessTo,
+    } = await Complaint.findOne({ compId: req.params.id }, { grantAccessTo: 1 })
       .populate("userId", "email")
       .exec();
-    
-      const Stage = await Complaint.findOne({ compId : req.params.id })
-      .select({
-        stage : 1
-      });
 
+    const Stage = await Complaint.findOne({ compId: req.params.id }).select({
+      stage: 1,
+    });
 
     if (req.user.userType === "hod") {
       await Complaint.updateOne(
@@ -317,25 +315,24 @@ router.post("/accept/:id", verify, validateAcceptSchema, async (req, res) => {
         { compId: req.params.id },
         {
           $set: {
-            actualMaterialCost:req.body.actualMaterialCost,
+            actualMaterialCost: req.body.actualMaterialCost,
             stage: 6,
-            status: 'Material allocated',
+            status: "Material allocated",
           },
         }
       );
     }
 
     if (req.user.userType === "admin") {
-
       console.log(Stage);
-      
-      if(Stage.stage==7){
+
+      if (Stage.stage == 7) {
         await Complaint.updateOne(
-          {compId: req.params.id },
+          { compId: req.params.id },
           {
             $set: {
               stage: 8,
-              status: 'Work done',
+              status: "Work done",
               // grantAccessTo: [grantAccessT],
             },
           }
@@ -345,13 +342,13 @@ router.post("/accept/:id", verify, validateAcceptSchema, async (req, res) => {
         });
       }
 
-      if(Stage.stage==6){
+      if (Stage.stage == 6) {
         await Complaint.updateOne(
-          {compId: req.params.id },
+          { compId: req.params.id },
           {
             $set: {
               stage: 7,
-              status: 'Work in progress',
+              status: "Work in progress",
               // grantAccessTo: [grantAccessT],
             },
           }
@@ -360,7 +357,6 @@ router.post("/accept/:id", verify, validateAcceptSchema, async (req, res) => {
           success: 1,
         });
       }
-
 
       const grantAccessT = grantAccessTo.length
         ? grantAccessTo[0]
@@ -368,33 +364,31 @@ router.post("/accept/:id", verify, validateAcceptSchema, async (req, res) => {
       if (req.body.Civil) grantAccessT.Civil = { isGranted: true };
       if (req.body.Mechanical) grantAccessT.Mechanical = { isGranted: true };
       if (req.body.Electrical) grantAccessT.Electrical = { isGranted: true };
-      if(req.body.director)grantAccessT.director={isGranted:true};
+      if (req.body.director) grantAccessT.director = { isGranted: true };
 
-      if(req.body.director){
+      if (req.body.director) {
         await Complaint.updateOne(
-          {compId: req.params.id },
+          { compId: req.params.id },
           {
             $set: {
               stage: 4,
-              status: 'Forwarded to director',
+              status: "Forwarded to director",
+              grantAccessTo: [grantAccessT],
+            },
+          }
+        );
+      } else {
+        await Complaint.updateOne(
+          { compId: req.params.id },
+          {
+            $set: {
+              stage: 3,
+              status: "Forwarded to Maintanance Commitee",
               grantAccessTo: [grantAccessT],
             },
           }
         );
       }
-
-      else{
-        await Complaint.updateOne(
-        { compId: req.params.id },
-        {
-          $set: {
-            stage: 3,
-            status: 'Forwarded to Maintanance Commitee',
-            grantAccessTo: [grantAccessT],
-          },
-        }
-      );
-    }
 
       // await generatePdf();
       // await sendMail(email, status, true);
@@ -403,17 +397,17 @@ router.post("/accept/:id", verify, validateAcceptSchema, async (req, res) => {
 
     if (req.user.userType === "committee") {
       console.log(Stage);
-      
+
       //forward complaint to administraticve officer
       //change grantAccessto object's isSubmitted field etc.
-  
-      if(Stage.stage==7){
+
+      if (Stage.stage == 7) {
         await Complaint.updateOne(
-          {compId: req.params.id },
+          { compId: req.params.id },
           {
             $set: {
               stage: 8,
-              status: 'Work done',
+              status: "Work done",
               // grantAccessTo: [grantAccessT],
             },
           }
@@ -423,13 +417,13 @@ router.post("/accept/:id", verify, validateAcceptSchema, async (req, res) => {
         });
       }
 
-      if(Stage.stage==6){
+      if (Stage.stage == 6) {
         await Complaint.updateOne(
-          {compId: req.params.id },
+          { compId: req.params.id },
           {
             $set: {
               stage: 7,
-              status: 'Work in progress',
+              status: "Work in progress",
               // grantAccessTo: [grantAccessT],
             },
           }
@@ -470,39 +464,37 @@ router.post("/accept/:id", verify, validateAcceptSchema, async (req, res) => {
         await complaint.save();
       }
     }
-    if(req.user.userType === 'director'){
+    if (req.user.userType === "director") {
       console.log(grantAccessTo[0].director.isGranted);
-      if(grantAccessTo[0].director.isGranted)
-      {
+      if (grantAccessTo[0].director.isGranted) {
         await Complaint.updateOne(
           { compId: req.params.id },
           {
             $set: {
               stage: 6,
-              status: 'Accepted by director',
+              status: "Accepted by director",
+            },
+          }
+        );
+      } else {
+        await Complaint.updateOne(
+          { compId: req.params.id },
+          {
+            $set: {
+              stage: 5,
+              status: "Forwarded to store",
             },
           }
         );
       }
-      else{
-      await Complaint.updateOne(
-        { compId: req.params.id },
-        {
-          $set: {
-            stage: 5,
-            status: 'Forwarded to store',
-          },
-        }
-      );
-      }
     }
-    if(req.user.userType === 'student'){
+    if (req.user.userType === "student") {
       await Complaint.updateOne(
         { compId: req.params.id },
         {
           $set: {
             stage: 9,
-            status: 'Acknowledged by user',
+            status: "Acknowledged by user",
           },
         }
       );

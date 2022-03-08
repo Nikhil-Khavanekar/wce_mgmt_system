@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   InputLabel,
   MenuItem,
@@ -7,23 +7,24 @@ import {
   Select,
   Button,
   Grid,
-} from '@material-ui/core';
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import AddIcon from '@material-ui/icons/Add';
-import { makeStyles } from '@material-ui/core/styles';
-import SearchBar from 'material-ui-search-bar';
+} from "@material-ui/core";
+import ReceiptIcon from "@material-ui/icons/Receipt";
+import AddIcon from "@material-ui/icons/Add";
+import { makeStyles } from "@material-ui/core/styles";
+import SearchBar from "material-ui-search-bar";
+import BackArrow from "@material-ui/icons/KeyboardBackspace";
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    backgroundColor: 'rgb(192, 45, 26)',
-    color: ' #fff',
+    backgroundColor: "rgb(192, 45, 26)",
+    color: " #fff",
   },
   formControl: {
-    width: '100%',
+    width: "100%",
   },
   searchBar: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
 }));
 
@@ -47,7 +48,7 @@ export default function DashboardHeader({
           User Requests
         </h1>
       </Grid>
-      <Grid item xs={12} style={{ backgroundColor: 'lightgrey' }}>
+      <Grid item xs={12} style={{ backgroundColor: "lightgrey" }}>
         <Grid container spacing={2}>
           <Grid item md={3} xs={6}>
             <SearchBar
@@ -64,11 +65,11 @@ export default function DashboardHeader({
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={'id'}>id</MenuItem>
-                <MenuItem value={'date'}>Date</MenuItem>
-                <MenuItem value={'title'}>Title</MenuItem>
-                <MenuItem value={'status'}>Status</MenuItem>
-                <MenuItem value={'department'}>Department</MenuItem>
+                <MenuItem value={"id"}>id</MenuItem>
+                <MenuItem value={"date"}>Date</MenuItem>
+                <MenuItem value={"title"}>Title</MenuItem>
+                <MenuItem value={"status"}>Status</MenuItem>
+                <MenuItem value={"department"}>Department</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -88,45 +89,59 @@ export default function DashboardHeader({
             </FormControl>
           </Grid>
           <Grid item md={3} xs={6}>
-            {match.url.substring(match.url.lastIndexOf('/') + 1) ===
-              'student' && (
+            {match.url.substring(match.url.lastIndexOf("/") + 1) ===
+              "student" && (
               <Link to="/ui/forms/complaint">
                 <Button
                   fullWidth
                   variant="contained"
                   color="primary"
-                  style={{ height: '100%' }}
+                  style={{ height: "100%" }}
                 >
                   <AddIcon />
                   New Request
                 </Button>
               </Link>
             )}
-            {match.url.substring(match.url.lastIndexOf('/') + 1) ===
-              'admin' && (
+            {match.url.substring(match.url.lastIndexOf("/") + 1) ===
+              "admin" && (
               <Link to="/ui/forms/Report">
                 <Button
                   fullWidth
                   variant="contained"
                   color="primary"
-                  style={{ height: '100%' }}
+                  style={{ height: "100%" }}
                 >
                   <ReceiptIcon />
                   Report
                 </Button>
               </Link>
             )}
-             {match.url.substring(match.url.lastIndexOf('/') + 1) ===
-              'store' && (
+            {match.url.substring(match.url.lastIndexOf("/") + 1) ===
+              "store" && (
               <Link to="/ui/store/Store">
                 <Button
                   fullWidth
                   variant="contained"
                   color="primary"
-                  style={{ height: '100%' }}
+                  style={{ height: "100%" }}
                 >
                   <ReceiptIcon />
-                 Manage Store
+                  Manage Store
+                </Button>
+              </Link>
+            )}
+            {match.url.substring(match.url.lastIndexOf("/") + 1) ===
+              "Report" && (
+              <Link to="/ui/dashboard/admin">
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  style={{ height: "100%" }}
+                >
+                  <BackArrow />
+                  Back To Dashboard
                 </Button>
               </Link>
             )}

@@ -33,6 +33,7 @@ const AdminDashboard = ({ match }) => {
     'Rejected by Administrative Officer',
     'Forwarded to Maintenance Commitee',
     'Rejected by Maintenance Commitee',
+    'Rejected by hod'
   ];
 
   useEffect(() => {

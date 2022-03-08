@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const AvailableInStoreSchema = new mongoose.Schema({
   materialId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Store',
+    ref: "Store",
   },
   quantity: {
     type: Number,
@@ -11,7 +11,7 @@ const AvailableInStoreSchema = new mongoose.Schema({
   },
   addedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
 });
 
@@ -30,14 +30,18 @@ const OrderedMaterialSchema = new mongoose.Schema({
   },
   addedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
+  },
+  actualCost: {
+    type: Number,
+    default: 0,
   },
 });
 
 const MaterialSchema = new mongoose.Schema({
   complaintId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Complaint',
+    ref: "Complaint",
   },
   availableInStore: {
     type: [AvailableInStoreSchema],
@@ -45,11 +49,11 @@ const MaterialSchema = new mongoose.Schema({
   orderedMaterial: {
     type: [OrderedMaterialSchema],
   },
-  
+
   sign: {
     type: String,
     required: true,
   },
 });
 
-module.exports = mongoose.model('Materials', MaterialSchema);
+module.exports = mongoose.model("Materials", MaterialSchema);
